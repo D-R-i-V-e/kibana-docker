@@ -21,7 +21,14 @@ lint: venv
 	  flake8 tests
 
 build: dockerfile
-	docker build --pull -t $(VERSIONED_IMAGE) build/kibana
+	docker build --pull -t $(VERSIONED_IMAGE) \
+    		--build-arg BRANCH_NAME="${BRANCH_NAME}" \
+    		--build-arg COMMIT_ID="$(shell git rev-parse HEAD)" \
+    		--build-arg BUILD_ID="${BUILD_ID}" \
+    		--build-arg JENKINS_URL="${JENKINS_URL}" \
+    		--build-arg JOB_NAME="${JOB_NAME}" \
+    		--build-arg NODE_NAME="${NODE_NAME}" \
+    		build/kibana
 
 # Push the image to the dedicated push endpoint at "push.docker.elastic.co"
 push: test

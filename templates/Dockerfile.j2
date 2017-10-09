@@ -46,4 +46,18 @@ RUN kibana-plugin install http://staging.elastic.co/{{ version_tag }}/downloads/
 RUN kibana-plugin install x-pack
 {% endif-%}
 
+ARG JENKINS_URL
+ARG NODE_NAME
+ARG JOB_NAME
+ARG BRANCH_NAME
+ARG COMMIT_ID
+ARG BUILD_ID
+
+LABEL jenkins.url="${JENKINS_URL}"
+LABEL node.name="${NODE_NAME}"
+LABEL job.name="${JOB_NAME}"
+LABEL branch.name="${BRANCH_NAME}"
+LABEL commit.id="${COMMIT_ID}"
+LABEL build.id="${BUILD_ID}"
+
 CMD /usr/local/bin/kibana-docker
