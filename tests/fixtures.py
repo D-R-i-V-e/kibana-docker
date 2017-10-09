@@ -9,7 +9,7 @@ from .retry import retry_settings
 def kibana(host):
     class Kibana(object):
         def __init__(self):
-            self.url = 'http://localhost:5601'
+            self.url = 'http://172.17.0.1:5601'
             self.process = host.process.get(comm='node')
 
             self.environment = dict(
