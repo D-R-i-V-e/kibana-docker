@@ -15,7 +15,7 @@ ELASTIC_REGISTRY=docker.elastic.co
 VERSIONED_IMAGE=$(ELASTIC_REGISTRY)/kibana/kibana:$(VERSION_TAG)
 
 test: lint build docker-compose.yml
-	./bin/testinfra tests
+	./bin/testinfra tests  --junit-xml tests/reports/image-tests.junit.xml
 
 lint: venv
 	  flake8 tests
